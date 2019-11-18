@@ -20,9 +20,9 @@ const { gql } = require('apollo-server');
 //   products: [Category]!
 // }
 
-const defineSchema = gql`
+const defineSchema = gql `
   type Query {
-    shops: String
+    shops: [Category]!
   }
 
   type Category {
