@@ -1,6 +1,7 @@
-const { ApolloServer, gql } = require('apollo-server');
+const { ApolloServer } = require('apollo-server');
+
 const typeDefs = require('./schema/schema');
-const shopQuery = require('./resolvers/shops');
+const { shopsQuery, createCategory, deleteCategory } = require('./resolvers/shops');
 
 // const typeDefs = gql`
 //   type Query{
@@ -9,16 +10,20 @@ const shopQuery = require('./resolvers/shops');
 // `
 
 const resolvers = {
-  Query: {
-    shops: shopQuery
-  }
-}
+    Query: {
+        shops: shopsQuery
+    },
+    Mutation: {
+        createCategory,
+        deleteCategory,
+    }
+};
 
 const server = new ApolloServer({
     typeDefs,
     resolvers
-  });
+});
 
-  server.listen().then(({ url }) => {
+server.listen().then(({ url }) => {
     console.log('Server running at: ', url);
-  })
+})

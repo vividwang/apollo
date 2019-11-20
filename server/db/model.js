@@ -5,19 +5,6 @@ mongoose.connect('mongodb://localhost:27017/shop', {
     useUnifiedTopology: true,
 });
 
-// async() => {
-//     try {
-//         await mongoose.connect('mongodb://localhost:27017/shop', {
-//             useNewUrlParser: true,
-//             useUnifiedTopology: true,
-//         });
-
-
-//     } catch (e) {
-//       console.error('Error while connect the db: ', e.message);
-//     }
-// }
-
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 

@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server');
 
-const defineSchema = gql`
+const defineSchema = gql `
 type Query {
   shops(
     """
@@ -34,11 +34,13 @@ type Query {
   type Mutation {
     deleteCategory(categoryIds: [ID]!): OperateResponse!
     createCategory(
-      id: ID!, 
-      name: String!, 
-      price: Int!, 
-      inventory: Int!, 
-      descraption: String,
+        """
+        category: String!
+        """
+      name: String!,
+      price: Int!,
+      inventory: Int!,
+      description: String,
       putawayer: String!,
       createTime: String!
       ): OperateResponse!
@@ -50,6 +52,6 @@ type Query {
     message: String
     info: [Category]
   }
-`
+`;
 
 module.exports = defineSchema;
