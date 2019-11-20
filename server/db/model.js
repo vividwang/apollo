@@ -27,7 +27,7 @@ const category = new Schema({
         default: 0,
     },
     description: {
-        type: Number,
+        type: String,
         isRequired: false,
         default: ""
     },
