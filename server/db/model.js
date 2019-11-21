@@ -12,6 +12,11 @@ const category = new Schema({
     id: {
         type: ObjectId
     },
+    img: {
+        type: String,
+        isRequired: true,
+        default: "",
+    },
     name: {
         type: String,
         isRequired: true,

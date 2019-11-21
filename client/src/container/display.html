@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script
+        type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.15&key=0f01127265d0d0386d1dfadd9ab27b71"></script>
+  <style>
+    #container {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    let map = new window.AMap.Map(document.getElementById('container'), {
+      pitch: 75,
+      resizeEnable: true,
+      center: [116.397428, 39.90923],
+      zoom: 13,
+      expandZoomRange: true,
+      Zooms: [3, 20],
+    });
+  </script>
+</body>
+</html>

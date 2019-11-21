@@ -3,10 +3,11 @@ import {
   Redirect
 } from 'react-router-dom';
 
+// todo
 function Auth(Component) {
   return class extends React.Component{
     render() {
-      return <Component {...this.props}/>
+      return document.cookie ? <Component {...this.props}/> : <Redirect to="/"/>
     }
   }
 }

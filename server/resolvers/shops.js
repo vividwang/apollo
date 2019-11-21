@@ -2,7 +2,8 @@ const category = require('../db/model');
 
 const shopsQuery = async (root, params, _) => {
   try {
-    let r = await category.find(params);
+    console.log('params', params);
+    let r = await category.find({});
     let hasMore = false;
     
     if (r.length > params.pageSize + parseInt(params.after, 10)) hasMore = true;

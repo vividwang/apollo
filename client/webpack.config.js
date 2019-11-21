@@ -7,7 +7,7 @@ const happyThreadPool = HappyPack.ThreadPool({ size: 3 });
 
 module.exports = {
   mode: 'development',
-  entry: ['react-hot-loader/patch', resolve(__dirname, 'admin/src/app.js')],// resolve(__dirname, 'src/app.js'),
+  entry: ['react-hot-loader/patch', resolve(__dirname, 'src/app.js')],// resolve(__dirname, 'src/app.js'),
   output: {
     path: resolve(__dirname, 'bundle'),
     filename: "app-[hash:8].bundle.js",
@@ -16,8 +16,8 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.jsx?$/,
-      include: resolve(__dirname, 'admin/src'),
+      test: /\.(js|jsx)$/,
+      include: resolve(__dirname, 'src'),
       loader: ['happypack/loader?id=babel'],
     }, {
       test: /\.(sa|sc|c)ss$/,
@@ -25,11 +25,16 @@ module.exports = {
       use: [{
         loader: MiniCssExtractPlugin.loader,
         options: {
-          publicPath: resolve(__dirname, 'admin/src'),
+          publicPath: resolve(__dirname, 'src'),
           hmr: process.env.NODE_ENV !== 'production'
         }
       }, 'css-loader',
-        'sass-loader']
+        'sass-loader', {
+          loader: 'sass-resources-loader',
+          options: {
+            resources: resolve(__dirname, 'src/style/global.scss')
+          }
+        }]
     }, {
       test: /\.(png|jpg|jpeg|gif)$/,
       use: [
@@ -47,7 +52,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'admin/src/index.html',
+      template: 'src/index.html',
       filename: "index.html",
       cache: true
     }),
@@ -76,8 +81,8 @@ module.exports = {
     port: 9000,
     open: true,
     historyApiFallback: true,
-    // proxy: {
-    //   '/': 'http://localhost:5000'
-    // }
+    proxy: {
+      '/': 'http://localhost:4000'
+    }
   }
 };
