@@ -6,18 +6,25 @@ class Display extends React.Component{
     super(props);
 
     this.state = {
-      flags: [],
+      capitals: []
     };
     this.mapContainer = React.createRef();
+    this.map = {};
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-
+    setInterval(() => {
+      this.setState({
+        capitals: [{
+          center: [105 + parseFloat((Math.random()* 5).toFixed(4)), 35 + parseFloat((Math.random()* 5).toFixed(4))]
+        }]
+      });
+    }, 2500);
   }
 
   componentDidMount() {
-    let map = new window.AMap.Map(this.mapContainer.current, {
+    this.map = new window.AMap.Map(this.mapContainer.current, {
       pitch: 75,
       resizeEnable: true,
       center: [106.397428, 36.90923],
@@ -28,11 +35,27 @@ class Display extends React.Component{
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-
+    let markerContent = `<div class="marker">
+      用户：A
+    </div>`;
+    let marker = [];
+    for(let i=0;i<this.state.capitals.length;i+=1){
+      let center = this.state.capitals[i].center;
+      let circleMarker = new window.AMap.Marker({
+        position:center,
+        content: markerContent,
+      });
+      circleMarker.setMap(this.map);
+      marker.push(circleMarker);
+    }
+    
+    setTimeout(() => {
+      this.map.remove(marker)
+    }, 3000);
   }
 
   render() {
-    return <>
+    return <div className="display">
       <div
         className="map-container"
         ref={this.mapContainer}>
@@ -48,13 +71,29 @@ class Display extends React.Component{
             padding: 0;
           }
           .map-container {
-            width: 98%;
-            height: 800px;
-            margin: auto;
+            width: 90%;
+            height: 500px;
+            margin: 50px auto;
+          }
+          .btn {
+            margin: 0 200px;
+            width: 100px;
+            height: 50px;
+          }
+          .marker {
+            width: 70px;
+            height: 70px;
+            font-size: 14px;
+            border-radius: 35px;
+            line-height: 70px;
+            text-align: center;
+            background-color: #42a5f5;
+            color: white;
+            box-shadow: 1px 1px 1px #ccc;
           }
         `}
       </style>
-    </>
+    </div>
   }
 }
 
