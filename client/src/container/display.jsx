@@ -25,10 +25,10 @@ class Display extends React.Component{
     this.map = new window.AMap.Map(this.mapContainer.current, {
       pitch: 75,
       resizeEnable: true,
-      center: [106.397428, 36.90923],
-      zoom: 5,
-      expandZoomRange: true,
-      Zooms: [3, 20],
+      center: [114.397428, 30.90923],
+      zoom: 10,
+      expandZoomRange: false,
+      Zooms: [10, 20],
     });
 
     socket.emit('init');
@@ -64,7 +64,7 @@ class Display extends React.Component{
       circleMarker.setMap(this.map);
       marker.push(circleMarker);
     }
-    
+
     setTimeout(() => {
       this.map.remove(marker)
     }, 4000);
