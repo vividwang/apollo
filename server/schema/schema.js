@@ -37,6 +37,7 @@ type Query {
         """
         category: String!
         """
+      id: ID!,  
       name: String!,
       price: Int!,
       inventory: Int!,

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloClient, InMemoryCache } from 'apollo-boost';
+import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
 import {
   BrowserRouter,
   Switch,
@@ -17,19 +17,23 @@ import TasksList from "./container/tasks/task_list.jsx";
 
 const cache = new InMemoryCache();
 const client = new ApolloClient({
-  uri: '/',
+  link: new HttpLink({ uri: '/' }),
   cache,
   resolvers,
 });
 
 const data = {
-  todos: {
-    __typename: 'todos',
-    data: [{
-      id: '123',
-      value: '12345678'
-    }]
-  },
+  todos: [{
+    __typename: 'todo',
+    id: '1',
+    value: 'do wash',
+    complete: true,
+  }, {
+    __typename: 'todo',
+    id: '2',
+    value: 'do homework',
+    complete: false,
+  }],
   visibilityFilter: 'SHOW_ALL',
   networkStatus: {
     __typename: 'NetworkStatus',
@@ -38,7 +42,7 @@ const data = {
 };
 
 cache.writeData({ data });
-client.onResetStore(() => cache.writeData({ data }));
+// client.onResetStore(() => cache.writeData({ data }));
 
 class App extends React.Component{
   render() {
