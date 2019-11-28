@@ -9,11 +9,13 @@ import {
 } from 'react-router-dom';
 
 import resolvers from "./container/tasks/task";
+// import resolvers from "./container/cart/resolver";
 
 import Index from './container/index.jsx';
 import Display from "./container/display.jsx";
 import Chart from "./component/chart.jsx";
 import TasksList from "./container/tasks/task_list.jsx";
+import Cart from "./container/cart/cart.jsx";
 
 const cache = new InMemoryCache();
 const client = new ApolloClient({
@@ -34,8 +36,9 @@ class App extends React.Component{
     return <ApolloProvider client={client}>
       <BrowserRouter>
         <Switch>
+          {/*<Route path="/" exact component={Cart}/>*/}
           <Route path="/" exact component={TasksList}/>
-          <Route path="/chart" exact>
+          <Route path="/chart">
             <div style={{ width: '500px', height: '500px' }}>
               <Chart />
             </div>
