@@ -23,22 +23,7 @@ const client = new ApolloClient({
 });
 
 const data = {
-  todos: [{
-    __typename: 'todo',
-    id: '1',
-    value: 'do wash',
-    complete: true,
-  }, {
-    __typename: 'todo',
-    id: '2',
-    value: 'do homework',
-    complete: false,
-  }],
-  visibilityFilter: 'SHOW_ALL',
-  networkStatus: {
-    __typename: 'NetworkStatus',
-    isConnected: false,
-  }
+  todos: []
 };
 
 cache.writeData({ data });

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {useQuery} from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 
 const GET_TODOS = gql`
     query GetTodos {
@@ -15,7 +15,7 @@ const resolvers = {
   Query: {
     todos(_root, args, { cache }) {
       let todos = cache.readQuery({ query: GET_TODOS });
-
+      
       console.log('todos', todos);
       return todos.todos;
     }
@@ -23,21 +23,21 @@ const resolvers = {
   Mutation: {
     addTodo: async (_root, args, { cache }) => {
       try {
-        console.log('mutation', args);
         const { id, value } = args;
-        const todos = await cache.readQuery({ query: GET_TODOS });
-
-        console.log('todos', todos);
-        let v = Object.assign({}, {
-          __typename: 'todo',
-          id,
-          value,
-          complete: false,
+        
+        console.log('value', id, value);
+        await cache.writeQuery({
+          query: GET_TODOS, data: {
+            todos: [{
+              __typename: 'todo',
+              id,
+              value,
+              complete: false,
+            }]
+          }
         });
-        console.log(todos.todos.concat(v));
-        cache.writeData(todos.todos.concat(v));
         return null;
-      }catch (e) {
+      } catch (e) {
         console.error('Error while mutate data: ', e.message);
       }
     }

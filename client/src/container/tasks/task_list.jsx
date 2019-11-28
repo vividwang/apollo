@@ -6,7 +6,7 @@ import Add from "./add.jsx";
 
 // import Tasks from "./tasks";
 
-const GET_TODOS = gql`  
+const GET_TODOS = gql`
     query Todos{
         todos @client {
             id
@@ -20,7 +20,7 @@ function TaskList(props) {
 
   console.log('data', data, loading, error);
   return <div>
-    <Add />
+    <Add data={data}/>
   </div>
 }
 
